@@ -1,0 +1,39 @@
+# Stream responses hold the Xtream Codes credentials, so this must stay internal: no
+# published ports and no reverse proxy route. Only the service that consumes the add-on
+# belongs on this network. The network is not `internal: true` because the add-on has
+# to reach XC_BASE_URL and the TMDB API. If the add-on shares a network namespace with
+# the consumer instead of having a network of its own, set HOST=127.0.0.1.
+services:
+  iptv-vod:
+    build:
+      context: .
+    image: iptv-vod:local
+    container_name: iptv-vod
+    restart: unless-stopped
+    user: ${PUID:-1000}:${PGID:-1000}
+    read_only: true
+    tmpfs:
+      - /tmp
+    networks:
+      - iptv-vod
+    expose:
+      - 7000
+    env_file:
+      - .env
+    # Fixed here because the volume and the healthcheck below depend on them. Every other
+    # setting goes in .env.
+    environment:
+      - PORT=7000
+      - DATA_DIR=/data
+    volumes:
+      - ./data:/data
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:7000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+
+networks:
+  iptv-vod:
+    name: iptv-vod

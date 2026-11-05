@@ -1,0 +1,17 @@
+{
+  "name": "iptv-vod-addon",
+  "version": "2.0.0",
+  "description": "Self-hosted Stremio stream add-on that serves VOD from your own Dispatcharr or Xtream Codes source, matched by IMDb and TMDB id.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kurrt/iptv-vod-addon.git"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "test": "node --test"
+  }
+}

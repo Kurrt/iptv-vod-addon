@@ -1,0 +1,4 @@
+.env
+compose.yaml
+data/
+node_modules/

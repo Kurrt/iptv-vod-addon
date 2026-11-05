@@ -1,0 +1,8 @@
+#!/bin/sh
+# Checks each commit message as you write it. Turn it on with:
+#   git config core.hooksPath .githooks
+if ! command -v node >/dev/null 2>&1; then
+    echo "commit-msg: node not found, skipping the commit check" >&2
+    exit 0
+fi
+exec node scripts/check-commits.js --message-file="$1"
