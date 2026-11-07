@@ -4,7 +4,7 @@ A small, self-hosted [Stremio](https://github.com/Stremio/stremio-addon-sdk) str
 
 > **This add-on must never have a public route.** Its stream responses contain your Xtream Codes username and password, in the URL of every stream, and it has no login. Do not publish its port or put it behind a reverse proxy. Run it on a private network where only one trusted client can reach it. See [Security model](#security-model).
 
-That client is usually an aggregator, such as [AIOStreams](https://github.com/Viren070/AIOStreams): another add-on that collects streams from several sources, sorts and filters them, and hands them to your player. If you don't run an aggregator, you'll need one first, because this can't safely be added straight to a player over a network.
+That client is usually an aggregator, such as [AIOStreams](https://github.com/Viren070/AIOStreams): another add-on that collects streams from several sources, sorts and filters them, and hands them to your player. It also works added directly to a server-side client that reads Stremio add-ons, such as Remux, when that client runs on the same private network as this add-on. If you have neither an aggregator nor such a client, you'll need one first, because this can't safely be added straight to a player over a network.
 
 ## What it does
 
